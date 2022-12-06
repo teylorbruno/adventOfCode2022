@@ -14,9 +14,8 @@ public class Utils {
 	public static Map<Integer, Integer> getMapFromFile(String path) {
 		Map<Integer, Integer> map = new HashMap<>();
 		File input = new File(path);
-		Scanner s = null;
 		try {
-			s = new Scanner(input);
+			Scanner s = new Scanner(input);
 			int i = 0;
 			int helper = 0;
 			while (s.hasNext()) {
@@ -32,6 +31,28 @@ public class Utils {
 		} catch (FileNotFoundException e) {
 			LOGGER.info(e.getMessage());
 		}
+		return map;
+	}
+
+	public static Map<String, Integer> getMapWithPatternCountFromFile(String path) {
+		Map<String, Integer> map = new HashMap<>();
+		File input = new File(path);
+		try {
+			Scanner s = new Scanner(input);
+			while (s.hasNext()) {
+				String line = s.nextLine();
+				if (!map.containsKey(line)) {
+					map.put(line, 1);
+				} else {
+					Integer counter = map.get(line);
+					map.put(line,++counter);
+				}
+			}
+
+		} catch (FileNotFoundException e) {
+			LOGGER.info(e.getMessage());
+		}
+		System.out.println(map);
 		return map;
 	}
 
